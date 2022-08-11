@@ -1,0 +1,2 @@
+for multistage build execute this command:
+docker build -t go-docker-server:multistage .
