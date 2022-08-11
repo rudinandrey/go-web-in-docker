@@ -1,6 +1,6 @@
 FROM golang:1.16-alpine as build
 WORKDIR /app
-COPY go.mod .
+COPY go.mod ./
 RUN go mod download
 COPY *.go ./
 RUN go build -o /server
@@ -11,4 +11,4 @@ WORKDIR /
 COPY --from=build /server /server
 EXPOSE 8080
 USER nonroot:nonroot
-ENTRYPOINT [ "/server" ]
+ENTRYPOINT ["/server"]
