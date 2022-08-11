@@ -3,9 +3,9 @@ WORKDIR /build
 COPY go.mod .
 RUN go mod download
 COPY *.go ./
-RUN go build -o /main main.go
-ENTRYPOINT [ "/main" ]
+RUN CGO_ENABLED=0 GOOS=linux go build -o /main main.go
 
-FROM alpine:3
+FROM scratch
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /main /bin/main
 ENTRYPOINT [ "/bin/main" ]
