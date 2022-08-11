@@ -7,5 +7,5 @@ RUN go build -o /main main.go
 ENTRYPOINT [ "/main" ]
 
 FROM alpine:3
-COPY --from=build main /bin/main
+COPY --from=build /main /bin/main
 ENTRYPOINT [ "/bin/main" ]
